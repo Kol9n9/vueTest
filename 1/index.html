@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue example</title>
+    <link rel="stylesheet" href="main.css"></style>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div class="container" id="app">
+        <div class="card">
+            <h1>Список заметок</h1>
+            <div class="form-control">
+                <input :value="inputValue" placeholder="Введите заметку"
+                @input="inputValue = $event.target.value"
+                @keypress.enter="addItem"
+                />
+            </div>
+            <div>
+                <input type="button" 
+                class="btn primary" 
+                value="Добавить" 
+                :disabled="isInputDisabled"
+                @click="addItem"/>
+            </div>
+            <hr>
+            <ul v-if="items.length" class="list">
+                <li class="list-item" v-for="(item,index) in items">
+                    {{ item }}
+                    <input type="button" class="btn danger" value="X" @click="items.splice(index,1)"/>
+                </li>
+            </ul>
+            <div class="list-item" v-else>Заметок нет</div>
+        </div>
+    </div>
+    <script src="./script.js"></script>
+</body>
+</html>
